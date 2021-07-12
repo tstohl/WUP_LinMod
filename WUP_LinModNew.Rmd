@@ -101,9 +101,51 @@ The line is to be estimate where it hits the y-axis. Each data will change the d
 
 
 
+```{r}
+newdata = data.frame(GRIP= 94, ARM = 88)
+predict(model.1, newdata, interval = "prediction")
+```
+
+
+This is a prediction interval. How far does one point vary from the other
+If you take .7 away from 3.13, you'd end up approximately 2.3.
+
+
 
 
 #### scatterplot with model fit
+
+
+  
+```{r}
+basicNN + geom_point() + geom_smooth(method=lm)
+``` 
+
+The equation formula for a line is y=mx+b. This regression line that has been drawn used this formula. The equation for SIMS explained by this line is: SIMS = -4.1 + 0.5 * ARM
+
+
+All the dots traveling up are part of that particular distribution. 
+
+The standard error was 1.226
+ Of each point along the ARM axis, the mean of the distribution is where the line falls. 
+The spread of the dots of the standard deviation of that normal distribution. 
+Each pt of thr line is a representative of one of the outputs.
+
+Every point displayed in this plot is an error Take the distance between each point ans square it. The sum of all the squared errors is the average mean error. Take the value of the average away from every dot, and then add that up.
+
+
+
+
+To find the The value of SIMS multiply the intercept, -4.095160 and the the Arm value, 0.054563.
+
+Multiply 100 by ARM, 0.054563 which equals 5.45. Then, add the intercept which is  about-4.1.
+
+To figure out what value on the y-intercept passes over the 100 on the x-axis, refer to the values included. It looks that the It looks like the value of the y-intercept would be around 1.25, give or take a few.
+
+
+
+
+
   
 
 ## Model 2 SIM~GRIP
@@ -111,15 +153,93 @@ The line is to be estimate where it hits the y-axis. Each data will change the d
 ### Now add in scatterplot
 
 
+
+```{r}
+basicNN <- ggplot(data,aes(y=SIMS,x=GRIP))
+```
+
+
+```{r}
+basicNN + geom_point()
+```
+
+
+The points in this plot are more closely knit.
+
+
+
+
 ### Numerical results 
 
 
+```{r}
+cor(SIMS~GRIP,data=data)
+```
+
+The correlation is 0.63. the hughter the correlation, the cloerr the points are to each other. This correlation is a bit smaller than the previous correlation between ARM.
+
+
+
+
 ### Inferential  (Build model.2)
+
+
+  
+```{r}
+model.2 <- lm(SIMS~GRIP,data=data)
+summary.lm(model.2)
+```
+
+The adjusted R- square is 0.4053. Previously, the number was 0.409
+Small standard error makes for a successful model. This model is not as good as the model With ARM,(model 1) because the standard deviation is larger. Notice the difference between the Multiple R-squared and the adjusted R-squared.
+
+
+In the adjusted R Square, the error was reduced by 40%(0.4053).
+The adjusted R-squared represents is the reduction of the error from the mean model on a percentage basis.
+The formula needed is y = mx + b to create a line.
+The adjusted R-squared represents is the reduction of the error from the mean model on a percentage basis.
+
+
+
+
+
+
   
 
 #### predict model.2 at target point
 
+
+
+
+```{r}
+predict(model.2, newdata, interval = "prediction")
+predict(model.2, newdata, interval = "confidence")
+```
+The first line is the prediction interval, the second line is the confidence interval. 
+The prediction interval is predicting where the next point will be. 
+The confidence interval is a prediction of where the line goes. The numbers range from -0.8 to -0.27. It is a confidence on the fit of the line.
+
+
+The Upper and Lower predictions represent the threshold.
+The prediction interval says that we're 95% confident that the prediction using this model is within these bounds. 
+
+
+
+
+
 #### now add the model fit to our plot for model.2
+
+
+
+```{r}
+basicNN + geom_point() + geom_smooth(method=lm)
+``` 
+
+The equation formula for a line is y=mx+b. This regression line that has been drawn used this formula. The equation for SIMS explained by this line is: SIMS = -4.1 + 0.45 * GRIP
+
+
+
+
   
 
 
@@ -127,17 +247,85 @@ The line is to be estimate where it hits the y-axis. Each data will change the d
 
 ### Numerical results (cor)
 
+
+
+```{r}
+cor(SIMS~ARM+GRIP,data=data)
+```
+
+
 `
-  
-### Inferential  (Build 2-dimentional model.3)
+  ### Inferential  (Build 2-dimentional model.3)
+
+
+
+```{r}
+model.3 <- lm(SIMS~GRIP + ARM ,data=data)
+summary.lm(model.3)
+```
+
+
+
+
+
+
 
 #### predict model.3 at target point
-  
+
+
+
+```{r}
+predict(model.3, newdata, interval = "prediction")
+```
+
+
+
+
+
 
 ## Comparing nested models ANOVA Test
 
 ### Model.1 vs Model.3
+
+
+```{r}
+anova(model.1,model.3)
+```
+
+ The p-value is 0.00000499. These results are unlikely to occur by chance. The null hypothesis is rejected in favor of the alternative. 
+ The residual degrees of freedom is 145. All th errors together add up to 217. The errors were reduced by 29.45.
+Model 2 is a better model than model 1 because more errors were corrected. 
+
+
+
+Model 1 and model3 are nested.
+
+
 ### Model.2 vs Model.3
 
+
+```{r}
+anova(model.2,model.3)
+```
+
+ The p-value based on these results is 0.000000001495. These results are unlikely to occur by chance.
+
+
+Model 2 is nested in model 3. The components in model 2 are also in model 3.
+
 ## Informally compare Model.1 with model.2
+
+
+```{r}
+anova(model.1,model.2)
+```
+0.467 is the adjusted R-squared for SIMS~ARM.
+
+0.4053 is the adjusted R-squared for SIMS~GRIP.
+
+How much the models are able to guess the average. 
+
+
+
+
 
