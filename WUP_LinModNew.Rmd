@@ -47,8 +47,7 @@ basicNN + geom_point()
 
 
 
-  
-The y-axis is SIMS and the x-axis is ARM. This plot shows that there is a positive linear correlation. Theres's a positive correlation between ARM and SIMS displayed in this plot above.
+  The y-axis is SIMS and the x-axis is ARM. This plot shows that there is a positive linear correlation. There's a positive correlation between ARM and SIMS displayed in this plot above.
 
 
 
@@ -62,7 +61,7 @@ The y-axis is SIMS and the x-axis is ARM. This plot shows that there is a positi
 cor(SIMS~ARM,data=data)
 ```
 
-The value is 0.68, which is a positive number that indicates the line will travel upwards towards the right.
+The value is 0.68, which is a positive number that indicates the line will travel upwards towards the right. The higher this number, the higher the correlation.
 
 
 
@@ -76,7 +75,7 @@ model.1 <- lm(SIMS~ARM,data=data)
 summary.lm(model.1)
 ```
 
-This model is better than thr one for GRIP. The Adjusted R-Square is bigger, which means more errors were reduced.
+This model is better than the one for GRIP. The Adjusted R-Square is bigger, which means more errors were reduced and that is what makes this a better model.
 
 
 If you go 1.226 up or down that is the prediction interval.
@@ -108,7 +107,10 @@ predict(model.1, newdata, interval = "prediction")
 
 
 This is a prediction interval. How far does one point vary from the other
-If you take .7 away from 3.13, you'd end up approximately 2.3.
+If you take .7 away from 3.13; you'd end up approximately 2.3.
+
+
+
 
 
 
@@ -138,7 +140,6 @@ Every point displayed in this plot is an error Take the distance between each po
 
 To find the The value of SIMS multiply the intercept, -4.095160 and the the Arm value, 0.054563.
 
-Multiply 100 by ARM, 0.054563 which equals 5.45. Then, add the intercept which is  about-4.1.
 
 To figure out what value on the y-intercept passes over the 100 on the x-axis, refer to the values included. It looks that the It looks like the value of the y-intercept would be around 1.25, give or take a few.
 
@@ -163,10 +164,9 @@ basicNN <- ggplot(data,aes(y=SIMS,x=GRIP))
 basicNN + geom_point()
 ```
 
-
-The points in this plot are more closely knit.
-
-
+The y-axis represents SIMS, while the x-axis represents GRIP.
+The points in this plot are more closely knit. Howver, this line also appears to a
+positive linear assocaiation although it isn't as obvious a s the first plot for model 1. 
 
 
 ### Numerical results 
@@ -176,7 +176,7 @@ The points in this plot are more closely knit.
 cor(SIMS~GRIP,data=data)
 ```
 
-The correlation is 0.63. the hughter the correlation, the cloerr the points are to each other. This correlation is a bit smaller than the previous correlation between ARM.
+The correlation is 0.63. the higher the correlation, the closer the points are to each other. This correlation is a bit smaller than the previous correlation between ARM.
 
 
 
@@ -237,7 +237,7 @@ basicNN + geom_point() + geom_smooth(method=lm)
 
 The equation formula for a line is y=mx+b. This regression line that has been drawn used this formula. The equation for SIMS explained by this line is: SIMS = -4.1 + 0.45 * GRIP
 
-
+This line appears to have a positive linear association.
 
 
   
@@ -252,10 +252,10 @@ The equation formula for a line is y=mx+b. This regression line that has been dr
 ```{r}
 cor(SIMS~ARM+GRIP,data=data)
 ```
+This is quite a but larger than the numbers seen in model 1 and model 2. The correlation is 0.73. The higher the correlation, the closer the points are to each other. 
 
 
-`
-  ### Inferential  (Build 2-dimentional model.3)
+### Inferential  (Build 2-dimentional model.3)
 
 
 
@@ -279,6 +279,11 @@ predict(model.3, newdata, interval = "prediction")
 ```
 
 
+The  line is the prediction interval. 
+The prediction interval is predicting where the next point will be. 
+The confidence interval is a prediction of where the line goes. The numbers range from -2.13 to 2.43 It is a confidence on the fit of the line.
+
+
 
 
 
@@ -292,13 +297,13 @@ predict(model.3, newdata, interval = "prediction")
 anova(model.1,model.3)
 ```
 
- The p-value is 0.00000499. These results are unlikely to occur by chance. The null hypothesis is rejected in favor of the alternative. 
- The residual degrees of freedom is 145. All th errors together add up to 217. The errors were reduced by 29.45.
+ The p-value is 0.00000499. These results are unlikely to occur by chance. The null hypothesis That there are no differences between the models is rejected in favor of the alternative that the models are different. The best model is model 3.
+ 
+ The residual sum of squares for model 1, only ARM, were initially 217.88. These are all the points that do not fall into the line. The results for model 3, using GRIP and ARM, the errors were then was reduced to 188.43. This totals at 29.45 improvement in reducing errors. The model that have GRIP and ARM reduced the error by 29.45 which is a significant adjustment. 
+ 
 Model 2 is a better model than model 1 because more errors were corrected. 
 
-
-
-Model 1 and model3 are nested.
+Model 1 and model 3 are nested because model on and 3 have the same components.
 
 
 ### Model.2 vs Model.3
@@ -308,8 +313,10 @@ Model 1 and model3 are nested.
 anova(model.2,model.3)
 ```
 
- The p-value based on these results is 0.000000001495. These results are unlikely to occur by chance.
-
+ The p-value based on these results is 0.000000001495. These results are unlikely to occur by chance. Again, the null hypothesis is rejected in favor of the alternative. The null hypothesis predicted that none of the models differ, and the alternative predicted that the models would vary in results.
+ Model 2, SIM~GRIP has a residual sum of squares of 243.07. Model 3, ARM and GRIP, have a residual su  of square of 188.43. The error was reduced by a generous 54.64 points. This is a highly significant change in error. Model 3 has substantially less errors than model 2 and so that means that model 3 is the superior model.
+ 
+ 
 
 Model 2 is nested in model 3. The components in model 2 are also in model 3.
 
@@ -319,14 +326,17 @@ Model 2 is nested in model 3. The components in model 2 are also in model 3.
 ```{r}
 anova(model.1,model.2)
 ```
-0.467 is the adjusted R-squared for SIMS~ARM.
+Model 1 and model 2 are not nested because they do not share the same components. With that being said, no p-value is available because of this. 
+Model 1, ARM, has a residual sum of square of 217 and model 3, GRIP, had a residual sum of square of 243. There was a reduction of 25.2 points. 
 
-0.4053 is the adjusted R-squared for SIMS~GRIP.
 
-How much the models are able to guess the average. 
+In conclusion, The null hypothesis that the models are the same is rejected in favor of the alternative hypothesis, that the models are different. 
+The best model is model 3, the second best model is model 2, and the least effective model is model 1. 
+
+
+
 
 we are 95% confidence that the prediction is greater than -3.19 and less than 2.94
 adj R-squared is a measure of how much of the variability in the response variable (SIMS) is explained by the explanatory variable (ARM)
-
 
 
