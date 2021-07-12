@@ -325,7 +325,8 @@ anova(model.1,model.2)
 
 How much the models are able to guess the average. 
 
-
+we are 95% confidence that the prediction is greater than -3.19 and less than 2.94
+adj R-squared is a measure of how much of the variability in the response variable (SIMS) is explained by the explanatory variable (ARM)
 
 
 
