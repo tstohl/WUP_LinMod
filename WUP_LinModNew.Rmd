@@ -1,7 +1,7 @@
 ---
 title: "linear model from Web"
-author: "Your Name"
-date: "Put semester and year"
+author: "Taylor Stohl"
+date: " Summer 2021"
 output:
    html_document:
          toc: true
@@ -35,12 +35,72 @@ data <- read.csv(file="https://onlinestatbook.com/case_studies_rvls/physical_str
 
 ### scatterplot
 
+
+```{r}
+basicNN <- ggplot(data,aes(y=SIMS,x=ARM))
+```
+
+
+```{r}
+basicNN + geom_point()
+```
+
+
+
+  
+The y-axis is SIMS and the x-axis is ARM. This plot shows that there is a positive linear correlation. Theres's a positive correlation between ARM and SIMS displayed in this plot above.
+
+
+
+
+
+
+
 ### Numerical results
+
+```{r}
+cor(SIMS~ARM,data=data)
+```
+
+The value is 0.68, which is a positive number that indicates the line will travel upwards towards the right.
+
+
+
+
 
 
 ### Inferential  (Build model.1)
 
+```{r}
+model.1 <- lm(SIMS~ARM,data=data)
+summary.lm(model.1)
+```
+
+This model is better than thr one for GRIP. The Adjusted R-Square is bigger, which means more errors were reduced.
+
+
+If you go 1.226 up or down that is the prediction interval.
+
+ The residual standard error represents the standard deviation of the  error points
+In this a linear regression model. the numbers that should be considered to create the prediction equation are the estimate coefficients. To predict SITS based on ARM strength, the intercept, -4.1 would be added to .05,ARM and then multiplied by ARM. 
+This equation for the prediction of SIMS would look like this:-4.1 + .05 * ARM.
+The formula needed is y = mx + b to create a line. The bigger the Adjusted R-squared, the better the model because it means that many of the errors were fixed. The degrees of freedom will be taken away from the Multiple-R squared and then what will be left is the Adjusted R-squared.
+In the adjusted R Square, the error was reduced by 46%(0.467).
+The adjusted R-squared represents is the reduction of the error from the mean model on a percentage basis.
+
+The 145 degrees of freedom is how many data points are displayed in the plot. 
+The line is to be estimate where it hits the y-axis. Each data will change the degree of freedom. Every time you add more stuff to the model, the Multiple R-squared will go down a small percentage.
+
+
+
+
+
+
+
 #### Predict at target point
+
+
+
 
 
 #### scatterplot with model fit
