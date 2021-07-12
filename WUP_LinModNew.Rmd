@@ -75,20 +75,15 @@ model.1 <- lm(SIMS~ARM,data=data)
 summary.lm(model.1)
 ```
 
-This model is better than the one for GRIP. The Adjusted R-Square is bigger, which means more errors were reduced and that is what makes this a better model.
-
-
-If you go 1.226 up or down that is the prediction interval.
-
- The residual standard error represents the standard deviation of the  error points
-In this a linear regression model. the numbers that should be considered to create the prediction equation are the estimate coefficients. To predict SITS based on ARM strength, the intercept, -4.1 would be added to .05,ARM and then multiplied by ARM. 
-This equation for the prediction of SIMS would look like this:-4.1 + .05 * ARM.
+In this linnear regression model the numbers that should be considered to create the prediction equation are the estimate coefficients. To predict SIMS based on ARM strength.
+This equation for the prediction of SIMS would look like this-
+SIMS = -4.1 + .05 * ARM.
 The formula needed is y = mx + b to create a line. The bigger the Adjusted R-squared, the better the model because it means that many of the errors were fixed. The degrees of freedom will be taken away from the Multiple-R squared and then what will be left is the Adjusted R-squared.
 In the adjusted R Square, the error was reduced by 46%(0.467).
 The adjusted R-squared represents is the reduction of the error from the mean model on a percentage basis.
 
 The 145 degrees of freedom is how many data points are displayed in the plot. 
-The line is to be estimate where it hits the y-axis. Each data will change the degree of freedom. Every time you add more stuff to the model, the Multiple R-squared will go down a small percentage.
+The line is to be estimate where it hits the y-axis. Each data will change the degree of freedom. Every time you add more data to the model, the Multiple R-squared will go down a small percentage.
 
 
 
@@ -106,9 +101,7 @@ predict(model.1, newdata, interval = "prediction")
 ```
 
 
-This is a prediction interval. How far does one point vary from the other
-If you take .7 away from 3.13; you'd end up approximately 2.3.
-
+This is a prediction interval.The predicted interval using thr equation above is the fit number at 0.70. The confidence interval is the 95% chance that all numbers will fall in between -1.72 and 3.13.
 
 
 
@@ -123,7 +116,8 @@ If you take .7 away from 3.13; you'd end up approximately 2.3.
 basicNN + geom_point() + geom_smooth(method=lm)
 ``` 
 
-The equation formula for a line is y=mx+b. This regression line that has been drawn used this formula. The equation for SIMS explained by this line is: SIMS = -4.1 + 0.5 * ARM
+The equation formula for a line is y=mx+b. This regression line that has been drawn used this formula. The equation for SIMS explained by this line is: 
+SIMS = -4.1 + 0.5 * ARM
 
 
 All the dots traveling up are part of that particular distribution. 
@@ -132,19 +126,6 @@ The standard error was 1.226
  Of each point along the ARM axis, the mean of the distribution is where the line falls. 
 The spread of the dots of the standard deviation of that normal distribution. 
 Each pt of thr line is a representative of one of the outputs.
-
-Every point displayed in this plot is an error Take the distance between each point ans square it. The sum of all the squared errors is the average mean error. Take the value of the average away from every dot, and then add that up.
-
-
-
-
-To find the The value of SIMS multiply the intercept, -4.095160 and the the Arm value, 0.054563.
-
-
-To figure out what value on the y-intercept passes over the 100 on the x-axis, refer to the values included. It looks that the It looks like the value of the y-intercept would be around 1.25, give or take a few.
-
-
-
 
 
   
@@ -190,21 +171,14 @@ model.2 <- lm(SIMS~GRIP,data=data)
 summary.lm(model.2)
 ```
 
-The adjusted R- square is 0.4053. Previously, the number was 0.409
-Small standard error makes for a successful model. This model is not as good as the model With ARM,(model 1) because the standard deviation is larger. Notice the difference between the Multiple R-squared and the adjusted R-squared.
+The adjusted R-squared is 0.4053. Previously, the number was 0.409.
+Small standard error makes for a successful model. This model is not as good as the model With ARM,(model 1) because the adjusted R-squared is bigger. This means that more wrrors have been corrected.
 
-
-In the adjusted R Square, the error was reduced by 40%(0.4053).
-The adjusted R-squared represents is the reduction of the error from the mean model on a percentage basis.
-The formula needed is y = mx + b to create a line.
+In the adjusted R-Squared, the error was reduced by 40%(0.4053).
 The adjusted R-squared represents is the reduction of the error from the mean model on a percentage basis.
 
 
 
-
-
-
-  
 
 #### predict model.2 at target point
 
@@ -216,8 +190,9 @@ predict(model.2, newdata, interval = "prediction")
 predict(model.2, newdata, interval = "confidence")
 ```
 The first line is the prediction interval, the second line is the confidence interval. 
-The prediction interval is predicting where the next point will be. 
-The confidence interval is a prediction of where the line goes. The numbers range from -0.8 to -0.27. It is a confidence on the fit of the line.
+The prediction interval is predicting where the next point will be. Fit is the prediction, which is -0.536. 
+The confidence interval is a prediction of where the line falls. There is a 95% chance the numbers range from -0.8 to -0.27. It is a confidence on the fit of the line.
+This chunk does all the calculating for us.
 
 
 The Upper and Lower predictions represent the threshold.
@@ -235,7 +210,8 @@ The prediction interval says that we're 95% confident that the prediction using 
 basicNN + geom_point() + geom_smooth(method=lm)
 ``` 
 
-The equation formula for a line is y=mx+b. This regression line that has been drawn used this formula. The equation for SIMS explained by this line is: SIMS = -4.1 + 0.45 * GRIP
+The equation formula for a line is y=mx+b. This regression line that has been drawn used this formula. The equation for SIMS explained by this line is: 
+SIMS = -4.1 + 0.45 * GRIP
 
 This line appears to have a positive linear association.
 
@@ -260,14 +236,13 @@ This is quite a but larger than the numbers seen in model 1 and model 2. The cor
 
 
 ```{r}
-model.3 <- lm(SIMS~GRIP + ARM ,data=data)
+model.3 <- lm(SIMS~ARM + GRIP,data=data)
 summary.lm(model.3)
 ```
 
-
-
-
-
+SIMS = -5.43 + 0.037 * ARM + 0.24 * GRIP is the equation for model 3.
+The Adjusted-R squared is 0.53 which means that there is a 53% correction of errors.
+This model explains the most variation. 
 
 
 #### predict model.3 at target point
@@ -279,10 +254,9 @@ predict(model.3, newdata, interval = "prediction")
 ```
 
 
-The  line is the prediction interval. 
+The  line is the prediction interval. The prediction is 0.14. This prediction is gathered from the equation above. 
 The prediction interval is predicting where the next point will be. 
-The confidence interval is a prediction of where the line goes. The numbers range from -2.13 to 2.43 It is a confidence on the fit of the line.
-
+There is a 95% chance that numbers range from -2.13 to 2.43. 
 
 
 
