@@ -196,7 +196,7 @@ This chunk does all the calculating for us.
 
 
 The Upper and Lower predictions represent the threshold.
-The prediction interval says that we're 95% confident that the prediction using this model is within these bounds. 
+The prediction interval says that the test is 95% confident that the prediction using this model is within these bounds. 
 
 
 
@@ -254,7 +254,7 @@ predict(model.3, newdata, interval = "prediction")
 ```
 
 
-The  line is the prediction interval. The prediction is 0.14. This prediction is gathered from the equation above. 
+The  line is the prediction interval. The prediction is 0.14. This prediction is gathered from the equation above. This predict model does all the calculations needed. 
 The prediction interval is predicting where the next point will be. 
 There is a 95% chance that numbers range from -2.13 to 2.43. 
 
@@ -271,7 +271,7 @@ There is a 95% chance that numbers range from -2.13 to 2.43.
 anova(model.1,model.3)
 ```
 
- The p-value is 0.00000499. These results are unlikely to occur by chance. The null hypothesis That there are no differences between the models is rejected in favor of the alternative that the models are different. The best model is model 3.
+ The p-value is 0.00000499. These results are unlikely to occur by chance. The null hypothesis, that there are no differences between the models, is rejected in favor of the alternative, that the models are different. The best model is model 3.
  
  The residual sum of squares for model 1, only ARM, were initially 217.88. These are all the points that do not fall into the line. The results for model 3, using GRIP and ARM, the errors were then was reduced to 188.43. This totals at 29.45 improvement in reducing errors. The model that have GRIP and ARM reduced the error by 29.45 which is a significant adjustment. 
  
@@ -302,6 +302,7 @@ anova(model.1,model.2)
 ```
 Model 1 and model 2 are not nested because they do not share the same components. With that being said, no p-value is available because of this. 
 Model 1, ARM, has a residual sum of square of 217 and model 3, GRIP, had a residual sum of square of 243. There was a reduction of 25.2 points. 
+Anova testa are designed for nested models and that is why the test between model 1 and model 2 are titled "informal."
 
 
 In conclusion, The null hypothesis that the models are the same is rejected in favor of the alternative hypothesis, that the models are different. 
