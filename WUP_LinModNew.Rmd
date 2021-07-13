@@ -221,6 +221,9 @@ This line appears to have a positive linear association.
 
 ## Model 3 SIM~ARM+GRIP
 
+Model 3 does not include plots because the plot would have to be 3 dimensional to support the model effectively. R does not have the necessary software to create such images.
+ 
+
 ### Numerical results (cor)
 
 
@@ -242,7 +245,7 @@ summary.lm(model.3)
 
 SIMS = -5.43 + 0.037 * ARM + 0.24 * GRIP is the equation for model 3.
 The Adjusted-R squared is 0.53 which means that there is a 53% correction of errors.
-This model explains the most variation. 
+This model explains the most variation corrected.
 
 
 #### predict model.3 at target point
@@ -302,7 +305,7 @@ anova(model.1,model.2)
 ```
 Model 1 and model 2 are not nested because they do not share the same components. With that being said, no p-value is available because of this. 
 Model 1, ARM, has a residual sum of square of 217 and model 3, GRIP, had a residual sum of square of 243. There was a reduction of 25.2 points. 
-Anova testa are designed for nested models and that is why the test between model 1 and model 2 are titled "informal."
+Anova tests are designed for nested models and that is why the test between model 1 and model 2 are titled "informal."
 
 
 In conclusion, The null hypothesis that the models are the same is rejected in favor of the alternative hypothesis, that the models are different. 
